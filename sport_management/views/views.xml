@@ -1,0 +1,136 @@
+<odoo>
+    <data>
+        <record model="ir.actions.act_window" id="action_sport_account">
+            <field name="name">account</field>
+            <field name="res_model">sport.account</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sport_type">
+            <field name="name">type course</field>
+            <field name="res_model">sport.type_course</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sport_card">
+            <field name="name">sport cards</field>
+            <field name="res_model">sport.sport_card</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sport_course">
+            <field name="name">course type</field>
+            <field name="res_model">sport.course</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- calendar session action -->
+
+        <record id="action_sport_session" model="ir.actions.act_window">
+            <field name="name">session</field>
+            <field name="res_model">sport.session</field>
+            <field name="view_mode">calendar,tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_sport_session_calendar">
+            <field name="name">session</field>
+            <field name="res_model">sport.session</field>
+            <field name="act_window_id" ref="action_sport_session"/>
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">calendar</field>
+        </record>
+
+        <record id="action_view_calendar_event_tree" model="ir.actions.act_window.view">
+            <field name="name">session</field>
+            <field name="res_model">sport.session</field>
+            <field name="act_window_id" ref="action_sport_session"/>
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <record id="action_view_kanban_event_tree" model="ir.actions.act_window.view">
+            <field name="name">session</field>
+            <field name="res_model">sport.session</field>
+            <field name="act_window_id" ref="action_sport_session"/>
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">kanban</field>
+        </record>
+
+        <record id="action_view_calendar_event_form" model="ir.actions.act_window.view">
+            <field name="name">session</field>
+            <field name="res_model">sport.session</field>
+            <field name="act_window_id" ref="action_sport_session"/>
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- list action -->
+
+        <record model="ir.actions.act_window" id="action_credit_list">
+            <field name="name">credits</field>
+            <field name="res_model">sport.credit</field>
+            <field name="context">{'search_default_account_id': [active_id]}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_quotation_list">
+            <field name="name">sale order</field>
+            <field name="res_model">sale.order</field>
+            <field name="context">{'search_default_credit_id': [active_id]}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_card_list">
+            <field name="name">cards</field>
+            <field name="res_model">sport.sport_card</field>
+            <field name="context">{'search_default_account_id': [active_id]}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_partner_credit_list">
+            <field name="name">credits</field>
+            <field name="res_model">sport.credit</field>
+            <field name="context">{'search_default_client_id': [active_id]}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_session_s_list">
+            <field name="name">Attendee subs</field>
+            <field name="res_model">sport.subscription</field>
+            <field name="context">{'search_default_session_id': [active_id], 'search_default_state':'sub'}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_session_w_list">
+            <field name="name">Waiting subs</field>
+            <field name="res_model">sport.subscription</field>
+            <field name="context">{'search_default_session_id': [active_id], 'search_default_state':'waiting'}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_session_c_list">
+            <field name="name">Canceled subs</field>
+            <field name="res_model">sport.subscription</field>
+            <field name="context">{'search_default_session_id': [active_id], 'search_default_state':'canceled'}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- menu item -->
+
+        <menuitem name="Sport Management" id="sport_management_menu" web_icon="sport_management,static/description/icon.png"/>
+
+        <menuitem name="Account management" id="account_management_top" parent="sport_management_menu" sequence="1"/>
+        <menuitem name="Account" id="menu_sport_account" parent="account_management_top" action="action_sport_account" sequence="1"/>
+        <menuitem name="Type course" id="menu_sport_type" parent="account_management_top" action="action_sport_type" sequence="2"/>
+        <menuitem name="Sport cards" id="menu_sport_card" parent="account_management_top" action="action_sport_card" sequence="3"/>
+
+        <menuitem name="Session management" id="session_management_top" parent="sport_management_menu" sequence="2"/>
+        <menuitem name="Course" id="menu_sport_course" parent="session_management_top" action="action_sport_course" sequence="1"/>
+        <menuitem name="Session" id="menu_sport_session" parent="session_management_top" action="action_sport_session" sequence="2"/>
+
+        <!-- website menu -->
+
+
+    </data>
+</odoo>

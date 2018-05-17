@@ -1,0 +1,83 @@
+<odoo>
+    <data>
+
+        <template id="sport_calendar_view" name="sport calendar view" customize_show="True">
+            <t t-call="website.layout">
+                <t t-set="title">Sessions calendar</t>
+                <!--JQUERYUI-->
+                <link rel='stylesheet' href='/sport_management/static/js/jquery-ui-dialog/jquery-ui.min.css'/>
+                <script src="/sport_management/static/js/jquery-ui-dialog/jquery-ui.min.js"></script>
+                <!--/JQUERYUI-->
+                <link rel='stylesheet' href='/sport_management/static/css/fullcalendar.css'/>
+                <link rel='stylesheet'
+                      href='/sport_management/static/js/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.css'/>
+                <script src="/sport_management/static/js/moment.min.js"></script>
+                <script src="/sport_management/static/js/fullcalendar.js"></script>
+                <script src="/sport_management/static/js/clockpicker-gh-pages/dist/bootstrap-clockpicker.min.js"></script>
+                <script type="module" src="/sport_management/static/js/calendar.js"></script>
+                <div class="oe_structure">
+                    <div class="alert alert-danger" role="alert" style="display:none;">
+                        <strong>Alert:</strong>
+                        <span id="danger-msg"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&amp;times</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-warning" role="alert" style="display:none;">
+                        <strong>Alert:</strong>
+                        <span id="warning-msg"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&amp;times</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success" role="alert" style="display:none;">
+                        <strong>info:</strong>
+                        <span id="success-msg"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&amp;times</span>
+                        </button>
+                    </div>
+                    <h1>CALENDAR</h1>
+                    <form class="form-inline">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto my-1">
+                                <label class="mr-sm-2" for="slt_course">Preference</label>
+                                <select class="custom-select mr-sm-2" id="slt_course">
+                                    <option>Choose course</option>
+                                </select>
+                            </div>
+                            <div class="col-auto my-1">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div>
+                        <!-- div used to create the calendar (with fullcalendar library) -->
+                        <div id="calendar"></div>
+                    </div>
+                    <div id="dialog-confirm" title="Subscription" style="display:none;">
+                        <p>
+                            <span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>
+                            <span id="dialog-msg"></span>
+                        </p>
+                        <br/>
+                        <div id="selected-course"></div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $('.clockpicker').clockpicker();
+                </script>
+            </t>
+        </template>
+
+        <template id="sport_subscribe_session_view" name="sport subscribe session" customize_show="True">
+            <div class="oe_structure">
+                <t t-name="SubscriptionSession">
+                    <div>test</div>
+                </t>
+            </div>
+        </template>
+
+    </data>
+</odoo>

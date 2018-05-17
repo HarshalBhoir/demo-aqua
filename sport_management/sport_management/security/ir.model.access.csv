@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sport_management_sessions_portal,sport_management.sessions_portal,model_sport_session,,1,1,1,1
+access_sport_management_sub_portal,sport_management.sub_portal,model_sport_subscription,,1,1,1,1
+access_sport_management_type_portal,sport_management.type_portal,model_sport_type_course,,1,1,1,1
+access_res_partner_portal,res.partner_portal,base.model_res_partner,base.group_portal,1,0,0,0
+access_sport_management_course_portal,sport_management.course_portal,model_sport_course,,1,0,0,0

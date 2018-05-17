@@ -1,0 +1,23 @@
+.day_number_big{
+    padding: .25em .4em;
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    border-radius: .25rem;
+    color: #fff;
+    background-color: #518FCC;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.row_strip{
+
+    border-left: 4px #efefef solid;
+}
+
+.blue_icone{
+
+    color: #518FCC;
+}

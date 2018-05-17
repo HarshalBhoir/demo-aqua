@@ -1,0 +1,33 @@
+<odoo>
+    <data>
+
+        <!-- res.partner inherit form view -->
+        <record id="sport_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.inherit.sport.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <button name="toggle_active" position="before">
+                    <button class="oe_stat_button" name="%(action_partner_credit_list)d" type="action" icon="fa-address-card">
+                        <field string="Credits" name="credit_count" widget="statinfo"/>
+                    </button>
+                </button>
+
+                <page name="sales_purchases" position="after">
+                    <page string="Cards" name="cards">
+                        <group>
+                            <field name="card_ids">
+                                <tree editable="bottom">
+                                    <field name="name" />
+                                    <field name="barcode" />
+                                    <field name="credit_count" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</odoo>

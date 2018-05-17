@@ -1,0 +1,37 @@
+<odoo>
+    <data>
+        <record id="sport_card_view_search" model="ir.ui.view">
+            <field name="name">sport.card.view.search</field>
+            <field name="model">sport.subscription</field>
+            <field name="arch" type="xml">
+                <search string="Search cards">
+                    <field name="client_id" operator="="/>
+                    <field name="session_id" operator="="/>
+                    <field name="state" operator="="/>
+                </search>
+            </field>
+        </record>
+
+        <record id="sport_subscription_view_form" model="ir.ui.view">
+            <field name="name">sport.subscription.view.form</field>
+            <field name="model">sport.subscription</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <header>
+                            <button string="Subscribe" type="object" name="subscribe" states="waiting,canceled"/>
+                            <button string="Valid subscription" type="object" name="valid" states="sub"/>
+                            <button string="Cancel subscription" type="object" name="cancel" states="sub,waiting"/>
+                        </header>
+                        <group>
+                            <field name="client_id"/>
+                            <field name="session_id"/>
+                            <field name="sub_date"/>
+                            <field name="state" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

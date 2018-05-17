@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+
+        <template id="portal_my_course" name="My courses" inherit_id="portal.portal_my_home" priority="30">
+            <xpath expr="//ul[hasclass('o_portal_docs')]" position="inside">
+                <li class="list-group-item">
+                    <a href="/my/courses">Courses</a>
+                </li>
+            </xpath>
+        </template>
+
+        <template id="client_courses" name="client courses view" customize_show="True">
+            <t t-call="website.layout">
+                <t t-set="title">My Courses</t>
+                <link rel='stylesheet' href='/sport_management/static/css/cient_back.css'/>
+                <script src="/sport_management/static/js/arrow_collapse.js"></script>
+                <script src="/sport_management/static/js/sub_modal.js"></script>
+                <div class="container">
+                <div class="text-center"><h1>Mes Cours</h1></div>
+                    <h2 class="collapse_clickable" data-toggle="collapse" data-target="#today">Mes Cours du jours <i class="fa fa-chevron-up"></i></h2>
+                    <div id="today" class="collapse in">
+                        <div class="row row_strip" t-foreach="today" t-as="subscription">
+                            <div class="col-sm-2 text-right">
+                                <h1><span class="day_number_big"><span t-field="subscription.session_id.start_date" t-field-options='{"format": "dd"}'/></span></h1>
+                                <h2><span t-esc='time.strftime("%b",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></h2>
+                            </div>
+                            <div class="col-sm-10">
+                                <h3 class="text-uppercase"><strong><span t-field="subscription.session_id.course_id.name" /></strong></h3>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span t-esc='time.strftime("%a",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></li>
+                                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> <span t-field="subscription.session_id.start_date" t-field-options='{"format": "HH:MM"}'/>
+                                        - <span t-field="subscription.session_id.end_date" t-field-options='{"format": "HH:MM"}'/></li>
+                                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="https://www.google.fr/maps/place/Centre+attitude/@47.2798218,-1.5545925,17z/data=!3m1!4b1!4m5!3m4!1s0x4805ee1d25cce8c3:0x8aa3f316ab495ae!8m2!3d47.2798182!4d-1.5524038">Aqua Attitude</a></li>
+                                </ul>
+                                <p><span class="fa fa-user" /> Coach : <span t-field="subscription.session_id.coach_id.name"/></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="collapse_clickable collapsed" data-toggle="collapse" data-target="#next">Mes Cours futurs <i class="fa fa-chevron-down"></i></h2>
+                    <div id="next" class="collapse">
+                        <div class="row row_strip" t-foreach="next" t-as="subscription">
+                            <div class="col-sm-2 text-right">
+                                <h1><span class="day_number_big"><span t-field="subscription.session_id.start_date" t-field-options='{"format": "dd"}'/></span></h1>
+                                <h2><span t-esc='time.strftime("%b",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></h2>
+                            </div>
+                            <div class="col-sm-8">
+                                <h3 class="text-uppercase"><strong><span t-field="subscription.session_id.course_id.name" /></strong></h3>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span t-esc='time.strftime("%a",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></li>
+                                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> <span t-field="subscription.session_id.start_date" t-field-options='{"format": "HH:MM"}'/>
+                                        - <span t-field="subscription.session_id.end_date" t-field-options='{"format": "HH:MM"}'/></li>
+                                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="https://www.google.fr/maps/place/Centre+attitude/@47.2798218,-1.5545925,17z/data=!3m1!4b1!4m5!3m4!1s0x4805ee1d25cce8c3:0x8aa3f316ab495ae!8m2!3d47.2798182!4d-1.5524038">Aqua Attitude</a></li>
+                                </ul>
+                                <p><span class="fa fa-user" /> Coach : <span t-field="subscription.session_id.coach_id.name"/></p>
+                            </div>
+                            <div class="col-sm-2">
+                                <button t-att-id="subscription.session_id.id" class="btn btn-danger cancel_sub" data-toggle="modal" data-target="#cancel_sub">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cancel_sub" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                
+                            </div>
+                            <div class="modal-body">
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <h2 class="collapse_clickable collapsed" data-toggle="collapse" data-target="#history">Historique de cours <i class="fa fa-chevron-down"></i></h2>
+                    <div id="history" class="collapse">
+                        <div class="row row_strip" t-foreach="past" t-as="subscription">
+                            <div class="col-sm-2 text-right">
+                                <h1><span class="day_number_big"><span t-field="subscription.session_id.start_date" t-field-options='{"format": "dd"}'/></span></h1>
+                                <h2><span t-esc='time.strftime("%b",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></h2>
+                            </div>
+                            <div class="col-sm-10">
+                                <h3 class="text-uppercase"><strong><span t-field="subscription.session_id.course_id.name" /></strong></h3>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><i class="fa fa-calendar-o" aria-hidden="true"></i> <span t-esc='time.strftime("%a",time.strptime(subscription.session_id.start_date, "%Y-%m-%d %H:%M:%S"))'/></li>
+                                    <li class="list-inline-item"><i class="fa fa-clock-o" aria-hidden="true"></i> <span t-field="subscription.session_id.start_date" t-field-options='{"format": "HH:MM"}'/>
+                                        - <span t-field="subscription.session_id.end_date" t-field-options='{"format": "HH:MM"}'/></li>
+                                        <li class="list-inline-item"><i class="fa fa-location-arrow" aria-hidden="true"></i> <a href="https://www.google.fr/maps/place/Centre+attitude/@47.2798218,-1.5545925,17z/data=!3m1!4b1!4m5!3m4!1s0x4805ee1d25cce8c3:0x8aa3f316ab495ae!8m2!3d47.2798182!4d-1.5524038">Aqua Attitude</a></li>
+                                </ul>
+                                <p><span class="fa fa-user" /> Coach : <span t-field="subscription.session_id.coach_id.name"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t> 
+        </template>   
+    </data>
+</odoo>

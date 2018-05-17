@@ -1,0 +1,97 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_session_calendar">
+            <field name="name">sport.session.calendar</field>
+            <field name="model">sport.session</field>
+            <field eval="1" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar date_start="start_date" date_stop="end_date" string="Sport session">
+                    <field name="name"/>
+                    <field name="coach_id"/>
+                    <field name="course_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- sport.session seach view -->
+        <record id="sport_card_view_search" model="ir.ui.view">
+            <field name="name">sport.card.view.search</field>
+            <field name="model">sport.sport_card</field>
+            <field name="arch" type="xml">
+                <search string="Search cards">
+                    <field name="account_id" operator="=" />
+                </search>
+            </field>
+        </record>
+
+        <!-- <record model="ir.ui.view" id="view_session_kanban">-->
+            <!--<field name="name">sport.session.kanban</field>-->
+            <!--<field name="model">sport.type_course</field>-->
+            <!--<field eval="2" name="priority"/>-->
+            <!--<field name="type">kanban</field>-->
+            <!--<field name="arch" type="xml">-->
+                <!--<field name="name" mode="kanban">-->
+                    <!--<kanban default_group_by="type_course.name">-->
+                        <!--<field name="session_ids" />-->
+                        <!--<templates>-->
+                            <!--<t t-name="kanban-box">-->
+                                <!--<div class="oe_resource_vignette">-->
+                                    <!--<div class="oe_resource_image">-->
+                                        <!--<a type="edit">-->
+                                            <!--<img t-att-src="kanban_image('sport.type_course', 'photo', record.id.value)" class="oe_resource_picture"/>-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                    <!--<div class="oe_resource_details">-->
+                                        <!--<ul>-->
+                                            <!--<t t-name="kanban-box">-->
+                                                <!--<t t-foreach="session_ids" t-as="session_id">-->
+                                                    <!--<li><t t-esc="session_id.name" /></li>-->
+                                                <!--</t>-->
+                                            <!--</t>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</t>-->
+                        <!--</templates>-->
+                    <!--</kanban>-->
+                <!--</field>-->
+            <!--</field>-->
+        <!--</record> -->
+
+
+        <!-- sport.session form view -->
+        <record id="sport_session_view_form" model="ir.ui.view">
+            <field name="name">sport.session.view.form</field>
+            <field name="model">sport.session</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="%(action_session_s_list)d" type="action"
+                                    icon="fa-user-circle">
+                                <field string="Subscribers" name="attendee_count" widget="statinfo" />
+                            </button>
+                            <button class="oe_stat_button" name="%(action_session_w_list)d" type="action"
+                                    icon="fa-pause">
+                                <field string="Waiting" name="waiting_attendee_count" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" name="%(action_session_c_list)d" type="action"
+                                    icon="fa-pause">
+                                <field string="Canceled" name="canceled_attendee_count" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <group>
+                            <field name="name"/>
+                            <field name="course_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="coach_id"/>
+                            <field name="max_attendee" />
+                            <field name="color"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
