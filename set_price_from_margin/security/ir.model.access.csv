@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_set_price_from_margin_set_price_from_margin,set_price_from_margin.set_price_from_margin,model_set_price_from_margin_set_price_from_margin,,1,0,0,0

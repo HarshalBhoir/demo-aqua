@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- add field type_margin and margin to form product -->
+        <record id="set_price_from_margin" model="ir.ui.view">
+            <field name="name">form.fields.margin.price</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='list_price']" position="before">
+                    <field name="type_margin" string="Type margin"/>
+                    <field name="margin" string="Margin"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
