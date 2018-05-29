@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <!-- sport.badge seach view -->
+        <record id="sport_badge_view_search" model="ir.ui.view">
+            <field name="name">sport.badge.view.search</field>
+            <field name="model">sport.badge</field>
+            <field name="arch" type="xml">
+                <search string="Search badges">
+                    <field name="account_id" operator="=" />
+                </search>
+            </field>
+        </record>
+
+        <record id="sport_badge_view_form" model="ir.ui.view">
+            <field name="name">sport.badge.view.form</field>
+            <field name="model">sport.badge</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="validity"/>
+                            <field name="client_id"/>
+                            <field name="barcode"/>
+                            <field name="account_id"/>
+                            <field name="subscription_ids">
+                                <tree string="Historique">
+                                    <field name="scan_date" />
+                                    <field name="unit_price" />
+                                </tree>
+                            </field>
+                            <button name="scan_card" type="object" >TEST SCAN</button>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

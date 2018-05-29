@@ -1,10 +1,10 @@
 <odoo>
     <data>
-        <record id="sport_card_view_search" model="ir.ui.view">
-            <field name="name">sport.card.view.search</field>
+        <record id="sport_badge_view_search" model="ir.ui.view">
+            <field name="name">sport.badge.view.search</field>
             <field name="model">sport.subscription</field>
             <field name="arch" type="xml">
-                <search string="Search cards">
+                <search string="Search Badges">
                     <field name="client_id" operator="="/>
                     <field name="session_id" operator="="/>
                     <field name="state" operator="="/>
@@ -27,7 +27,10 @@
                             <field name="client_id"/>
                             <field name="session_id"/>
                             <field name="sub_date"/>
-                            <field name="state" readonly="1"/>
+                            <field name="state"/>
+                            <field name="badge_id" readonly="1"/>
+                            <field name="scan_date" readonly="1"/>
+                            <field name="unit_price" readonly="1"/>
                         </group>
                     </sheet>
                 </form>

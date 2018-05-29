@@ -12,15 +12,15 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <record model="ir.actions.act_window" id="action_sport_card">
-            <field name="name">sport cards</field>
-            <field name="res_model">sport.sport_card</field>
+        <record model="ir.actions.act_window" id="action_sport_badge">
+            <field name="name">sport badges</field>
+            <field name="res_model">sport.badge</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <record model="ir.actions.act_window" id="action_sport_course">
-            <field name="name">course type</field>
-            <field name="res_model">sport.course</field>
+        <record model="ir.actions.act_window" id="action_sport_activity">
+            <field name="name">Activitées</field>
+            <field name="res_model">sport.activity</field>
             <field name="view_mode">tree,form</field>
         </record>
 
@@ -48,13 +48,13 @@
             <field name="view_mode">tree</field>
         </record>
 
-        <record id="action_view_kanban_event_tree" model="ir.actions.act_window.view">
+        <!-- <record id="action_view_kanban_event_tree" model="ir.actions.act_window.view">
             <field name="name">session</field>
             <field name="res_model">sport.session</field>
             <field name="act_window_id" ref="action_sport_session"/>
             <field name="sequence" eval="3"/>
             <field name="view_mode">kanban</field>
-        </record>
+        </record> -->
 
         <record id="action_view_calendar_event_form" model="ir.actions.act_window.view">
             <field name="name">session</field>
@@ -81,9 +81,9 @@
         </record>
 
 
-        <record model="ir.actions.act_window" id="action_card_list">
-            <field name="name">cards</field>
-            <field name="res_model">sport.sport_card</field>
+        <record model="ir.actions.act_window" id="action_badge_list">
+            <field name="name">badges</field>
+            <field name="res_model">sport.badge</field>
             <field name="context">{'search_default_account_id': [active_id]}</field>
             <field name="view_mode">tree,form</field>
         </record>
@@ -123,10 +123,10 @@
         <menuitem name="Account management" id="account_management_top" parent="sport_management_menu" sequence="1"/>
         <menuitem name="Account" id="menu_sport_account" parent="account_management_top" action="action_sport_account" sequence="1"/>
         <menuitem name="Type course" id="menu_sport_type" parent="account_management_top" action="action_sport_type" sequence="2"/>
-        <menuitem name="Sport cards" id="menu_sport_card" parent="account_management_top" action="action_sport_card" sequence="3"/>
+        <menuitem name="Sport badges" id="menu_sport_badge" parent="account_management_top" action="action_sport_badge" sequence="3"/>
 
         <menuitem name="Session management" id="session_management_top" parent="sport_management_menu" sequence="2"/>
-        <menuitem name="Course" id="menu_sport_course" parent="session_management_top" action="action_sport_course" sequence="1"/>
+        <menuitem name="Activitées" id="menu_sport_activity" parent="session_management_top" action="action_sport_activity" sequence="1"/>
         <menuitem name="Session" id="menu_sport_session" parent="session_management_top" action="action_sport_session" sequence="2"/>
 
         <!-- website menu -->

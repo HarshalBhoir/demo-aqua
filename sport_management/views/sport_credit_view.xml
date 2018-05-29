@@ -19,12 +19,12 @@
                             </button>
                         </div>
                         <group>
-                            <field name="name"/>
                             <field name="account_id" />
                             <field name="type_id" />
                             <field name="number_actual" />
                             <field name="date_valid" />
                             <field name="client_id" />
+                            <field name="product_id" />
                         </group>
                     </sheet>
                 </form>
@@ -36,10 +36,22 @@
             <field name="name">sport.credit.view.search</field>
             <field name="model">sport.credit</field>
             <field name="arch" type="xml">
-                <search string="Search cards">
+                <search string="Search credit">
                     <field name="account_id" operator="=" />
                     <field name="client_id" operator="=" />
                 </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="credit_view_tree">
+            <field name="name">Credit List</field>
+            <field name="model">sport.credit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="number_actual" />
+                    <field name="date_valid" />
+                    <field name="total" string="Total(€)"/>
+                </tree>
             </field>
         </record>
     </data>

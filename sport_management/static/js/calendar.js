@@ -29,27 +29,27 @@ function calendar_printer() {
         var weContext = require('web_editor.context');
         var ajax = require('web.ajax');
         var usession = require('web.session');
-        var course_ids = [];
+        var activity_ids = [];
         var sessions = [];
         var session_ids = [];
 
         // we are loading all courses with odoo rpc api
         rpc.query({
-            model: 'sport.course',
+            model: 'sport.activity',
             // method: 'search_read',
-            method: 'search_courses',
+            method: 'search_activites',
             context: weContext.get(),
         }).then(function (data) {
-            JSON.parse(data).forEach(function (course_id) {
-                $('#slt_course').append('<option value="' + course_id.id + '">' + course_id.name + '</option>');
-                course_id.session_ids.forEach(function (session_id) {
+            JSON.parse(data).forEach(function (activity_id) {
+                $('#slt_course').append('<option value="' + activity_id.id + '">' + activity_id.name + '</option>');
+                activity_id.session_ids.forEach(function (session_id) {
                     session_id.subscription_ids.forEach(function (subscription_id) {
                         if (subscription_id.client_id == usession.user_id) {
                             switch (subscription_id.state) {
                                 case 'sub':
                                     session_id.color = '#35b0c6';
                                     session_id['state'] = 'sub';
-                                    session_id['msg'] = 'Are you sure you want to <b>unsubscribe</b> for this course ?';
+                                    session_id['msg'] = 'Are you sure you want to <b>unsubscribe</b> for this activity ?';
                                     break;
                                 case 'valid':
                                     session_id.color = 'green';
@@ -59,12 +59,12 @@ function calendar_printer() {
                                 case 'canceled':
                                     session_id.color = 'gray';
                                     session_id['state'] = 'canceled';
-                                    session_id['msg'] = 'Are you sure you want to <b>subscribe</b> for this course ?';
+                                    session_id['msg'] = 'Are you sure you want to <b>subscribe</b> for this activity ?';
                                     break;
                                 case 'waiting':
                                     session_id.color = 'orange';
                                     session_id['state'] = 'waiting';
-                                    session_id['msg'] = 'Are you sure you want to <b>unsubscribe</b> for this course ?';
+                                    session_id['msg'] = 'Are you sure you want to <b>unsubscribe</b> for this activity ?';
                                     break;
                                 case 'absent':
                                     session_id.color = 'red';
@@ -76,7 +76,7 @@ function calendar_printer() {
                     });
                     session_ids.push(session_id);
                 });
-                course_ids.push(course_id);
+                activity_ids.push(activity_id);
             });
 
             // init calendar
@@ -97,11 +97,11 @@ function calendar_printer() {
 
                     // Get informations of event (day, date, hours start and end
                     var tb_day_str = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-                    var course = event.title;
+                    var activity = event.title;
                     var day = tb_day_str[event.start._d.getUTCDay()];
                     var hours_start = event.start._d.getUTCHours() + ':' + event.start._d.getUTCMinutes();
                     var hours_end = event.end._d.getUTCHours() + ':' + event.end._d.getUTCMinutes();
-                    var msg = event.msg ? event.msg : 'Are you sure you want to <b>subscribe</b> for this course ?';
+                    var msg = event.msg ? event.msg : 'Are you sure you want to <b>subscribe</b> for this activity ?';
 
                     // Exit function if event is outdated
                     if (Date.now() > event.start) {
@@ -112,8 +112,8 @@ function calendar_printer() {
                         console.log('test');
                         // Add message in dialog box.
                         $('#dialog-msg').html(msg);
-                        $('#selected-course').html(
-                            '<b>Course : </b>' + course + '<br /><b>On : </b>' + day + '<br /><b>At : </b>' + hours_start + ' - ' + hours_end
+                        $('#selected-activity').html(
+                            '<b>activity : </b>' + activity + '<br /><b>On : </b>' + day + '<br /><b>At : </b>' + hours_start + ' - ' + hours_end
                         );
                         $('#dialog-confirm').dialog({
                             resizable: false,

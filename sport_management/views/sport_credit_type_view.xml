@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+
+        <!-- sport.type_course form view -->
+        <record id="type_course_form_view" model="ir.ui.view">
+            <field name="name">sport.type_course.view.form</field>
+            <field name="model">sport.type_course</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="product_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

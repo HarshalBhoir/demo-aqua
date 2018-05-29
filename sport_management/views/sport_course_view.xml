@@ -1,23 +1,23 @@
 <odoo>
     <data>
-        <!-- sport.course form view -->
-        <record id="sport_course_view_form" model="ir.ui.view">
-            <field name="name">sport.course.view.form</field>
-            <field name="model">sport.course</field>
+        <!-- sport.activity form view -->
+        <record id="sport_activity_view_form" model="ir.ui.view">
+            <field name="name">sport.activity.view.form</field>
+            <field name="model">sport.activity</field>
             <field name="arch" type="xml">
-                <form string="Course">
+                <form string="activity">
                     <sheet>
                         <group>
                             <field name="name"/>
                             <label for="len_hours" string="Durée : " />
                             <div class="hour_picker">
-                                <field name="len_hours" style="width: 50%" placeholder="HH" />
-                                <field name="len_mins" style="width: 50%" placeholder="MM" />
+                                <field name="len_hours" style="width: 25%" placeholder="HH" />
+                                <field name="len_mins" style="width: 25%" placeholder="MM" />
                             </div>
                             <field name="length" />
                             <field name="max_attendee" />
+                            <field name="min_attendee" />
                             <field name="course_type_id" />
-                            <field name="color" />
                         </group>
                     </sheet>
                 </form>

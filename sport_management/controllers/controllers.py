@@ -61,12 +61,12 @@ class SportController(http.Controller):
             ['id', '=', web_session_id]
         ])
 
-        course_max_attendee = session_id.course_id.max_attendee
+        activity_max_attendee = session_id.activity_id.max_attendee
         session_subscriptions = session_id.attendee_count
         waiting_list = True
 
         # Check if the max attendee is full
-        if course_max_attendee > session_subscriptions:
+        if activity_max_attendee > session_subscriptions:
             waiting_list = False
 
         subscribed = self.already_subscribed(subscription_ids, session_id)
@@ -175,7 +175,7 @@ class SportController(http.Controller):
         })
 
 
-    # controller that render the client courses list
+    # controller that render the client activities list
     # return a view
     @http.route('/my/courses', auth='public', website=True, type="http")
     def client_web_interface(self, **kw):
@@ -212,4 +212,4 @@ class SportController(http.Controller):
             'past':history_list,
         }
         
-        return http.request.render('sport_management.client_courses', values)
+        return http.request.render('sport_management.client_activities', values)

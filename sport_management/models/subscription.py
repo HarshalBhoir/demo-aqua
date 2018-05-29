@@ -14,6 +14,10 @@ class Subscription(models.Model):
     client_id = fields.Many2one('res.partner')
     session_id = fields.Many2one('sport.session')
     sub_date = fields.Datetime(default=datetime.today())
+    currency_id = fields.Many2one('res.currency', string='Currency')
+    unit_price = fields.Monetary(digits=2, currency_field='currency_id', string="Prix de la séance")
+    scan_date = fields.Datetime(sting="Date de validation de la séance")
+    badge_id = fields.Many2one('sport.badge')
     state = fields.Selection([
         ('sub', 'Sub'),
         ('valid', 'Valid'),
@@ -109,7 +113,7 @@ class Subscription(models.Model):
         body += 'Has been registered to the session : <br />'
         body += self.session_id.name + '<br />'
         body += 'At : ' + self.session_id.start_date + '<br />'
-        body += 'Hours : ' + str(self.session_id.course_id.length) + '<br /><br />'
+        body += 'Hours : ' + str(self.session_id.activity_id.length) + '<br /><br />'
 
         self.send_mail(subject, email_to, body)
 
@@ -129,7 +133,7 @@ class Subscription(models.Model):
         body += 'Has been participated to the session : <br />'
         body += self.session_id.name + '<br />'
         body += 'At : ' + self.session_id.start_date + '<br />'
-        body += 'Hours : ' + str(self.session_id.course_id.length) + '<br /><br />'
+        body += 'Hours : ' + str(self.session_id.activity_id.length) + '<br /><br />'
 
         self.send_mail(subject, email_to, body)
 
@@ -149,7 +153,7 @@ class Subscription(models.Model):
         body += 'Has been registered in waiting list to the session : <br />'
         body += self.session_id.name + '<br />'
         body += 'At : ' + self.session_id.start_date + '<br />'
-        body += 'Hours : ' + str(self.session_id.course_id.length) + '<br /><br />'
+        body += 'Hours : ' + str(self.session_id.activity_id.length) + '<br /><br />'
 
         self.send_mail(subject, email_to, body)
 
@@ -195,7 +199,7 @@ class Subscription(models.Model):
         body += 'Has been canceled its registration to the session : <br />'
         body += self.session_id.name + '<br />'
         body += 'At : ' + self.session_id.start_date + '<br />'
-        body += 'Hours : ' + str(self.session_id.course_id.length) + '<br /><br />'
+        body += 'Hours : ' + str(self.session_id.activity_id.length) + '<br /><br />'
         body += waiting_list + '</p>'
 
         self.send_mail(subject, email_to, body)
@@ -207,7 +211,7 @@ class Subscription(models.Model):
         email_to = self.env.user.company_id.email
         body = '<p>' + self.client_id.name + ', was absent at the ' + self.session_id.name + \
                ' session at ' + self.session_id.start_date + ' for ' \
-               + str(self.session_id.course_id.length) + '.</p>'
+               + str(self.session_id.activity_id.length) + '.</p>'
 
         self.send_mail(subject, email_to, body)
 

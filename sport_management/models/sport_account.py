@@ -10,16 +10,13 @@ class SportAccount(models.Model):
     name = fields.Char(string='Name')
     date_create = fields.Datetime(string = 'Creation date', default=fields.Datetime.now)
     credit_ids = fields.One2many('sport.credit', 'account_id', string="account's credit list")
-    card_ids = fields.One2many('sport.sport_card', 'account_id', string="account's cards list")
+    badge_ids = fields.One2many('sport.badge', 'account_id', string="account's badges list")
     credit_count = fields.Integer(compute="_compute_credit_count")
-    card_count = fields.Integer(compute="_compute_card_count")
+    badge_count = fields.Integer(compute="_compute_badge_count")
     active = fields.Boolean(default=True)
-    partner_id = fields.Many2one(comodel_name='res.partner', string='Account owner', required=False)
+    owner_id = fields.Many2one('res.partner', string="Owner")
+    member_ids = fields.One2many('res.partner', 'account_id')
     
-
-    def _add_credit(self):
-        pass
-
     def remove_credit(self):
         for account in self:
             index = 0
@@ -29,7 +26,6 @@ class SportAccount(models.Model):
             else:
                 index = index + 1
 
-
     @api.depends('credit_ids')
     def _compute_credit_count(self):
         for account in self:
@@ -38,11 +34,11 @@ class SportAccount(models.Model):
                 if credit.status == "valid":
                     account.credit_count += credit.number_actual
 
-    def _compute_card_count(self):
+    def _compute_badge_count(self):
         for account in self:
-            account.card_count = 0
-            for card in account.card_ids:
-                account.card_count += 1
+            account.badge_count = 0
+            for badge in account.badge_ids:
+                account.badge_count += 1
 
     @api.depends('active')
     def toogle_active(self):

@@ -10,7 +10,7 @@ class Session(models.Model):
     _description = 'Sport session'
 
     name = fields.Char(string='Name')
-    course_id = fields.Many2one('sport.course', string="Course")
+    activity_id = fields.Many2one('sport.activity', string="Activitées")
     start_date = fields.Datetime(string="Start date")
     end_date = fields.Datetime(string="End date")
     coach_id = fields.Many2one('res.partner', string="Coach")
@@ -58,19 +58,19 @@ class Session(models.Model):
     def search_all_session(self):
         return self.env['sport.session'].search([('state', 'like', 'valid')])
 
-    @api.depends("course_id")
+    @api.depends("activity_id")
     def _compute_color(self):
         for session in self:
-            session.color = session.course_id.color
+            session.color = session.activity_id.color
 
     # Auto complet end_date in form field
     @api.onchange('start_date')
     def _compute_end_date(self):
         for session in self:
-            if session.course_id.length:
-                length = datetime.strptime(session.course_id.length, '%H:%M').time()
+            if session.activity_id.length:
+                length = datetime.strptime(session.activity_id.length, '%H:%M').time()
                 date = datetime.strptime(session.start_date, '%Y-%m-%d %H:%M:%S')
-                session.end_date = date + timedelta(hours=length.hour, seconds=length.second)
+                session.end_date = date + timedelta(hours=length.hour, minutes=length.minute)
 
     # Print calendar to PDF
     @api.multi
@@ -92,8 +92,8 @@ class Session(models.Model):
 
             sessions.append({"id": session.id,
                              "title": session.name,
-                             "course_id": session.course_id.id,
-                             "course_name": session.course_id.name,
+                             "activity_id": session.activity_id.id,
+                             "activity_name": session.activity_id.name,
                              "start": session.start_date,
                              "end": session.end_date,
                              "color": session.color,
@@ -105,4 +105,15 @@ class Session(models.Model):
 
     def _compute_max_attendee(self):
         for session in self:
-            self.max_attendee = session.course_id.max_attendee
+            self.max_attendee = session.activity_id.max_attendee
+        
+    @api.onchange('activity_id')
+    def _update_session_end_date(self):
+        for session in self:
+            _logger.info(session.activity_id.length)
+            if session.activity_id.length != False and session.start_date != False:
+                length = datetime.strptime(session.activity_id.length, '%H:%M').time()
+                date = datetime.strptime(session.start_date, '%Y-%m-%d %H:%M:%S')
+                _logger.info(length.second)
+                session.end_date = date + timedelta(hours=length.hour, minutes=length.minute)
+                _logger.info('aa')
