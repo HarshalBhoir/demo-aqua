@@ -21,7 +21,8 @@
     "data": [
         'views/product_view.xml',
         'wizard/product_bundle_wizard_view.xml',
-        'security/ir.model.access.csv'
+        'security/ir.model.access.csv',
+		'views/point_of_sale.xml'
     ],
     "price": 19,
     "currency": 'EUR',
@@ -29,5 +30,6 @@
     "application": True,
     "auto_install": False,
     "images":['static/description/Banner.png'],
+	'qweb': ['static/src/xml/test.xml'],
 
 }

@@ -1,0 +1,15 @@
+<templates id="template" xml:space="preserve">
+	<t t-extend="Orderline">
+		<t t-jquery=".info-list" t-operation="append">
+			<t t-if="line.pack != null">
+				<t t-if="line.pack.is_pack == true">
+					<t t-foreach="line.pack.pack_ids" t-as="product_id">
+						<li>
+							<t t-esc="line.get_product_name(product_id)"/>
+						</li>
+					</t>
+				</t>
+			</t>
+		</t>
+	</t>
+</templates>
