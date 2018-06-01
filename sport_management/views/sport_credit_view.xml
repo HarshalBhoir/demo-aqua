@@ -6,16 +6,10 @@
             <field name="model">sport.credit</field>
             <field name="arch" type="xml">
                 <form string="">
-                    <header>
-                        <button name="create_sale_order" type="object" class="btn-primary" string="Create Sale Order"></button>
-                    </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
                         <button name="toogle_active" type="object" class="oe_stat_button" icon="fa-archive">
                                 <field name="status" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                            </button>
-                            <button name="%(action_quotation_list)d" type="action" class="oe_stat_button" icon="fa-archive">
-                                <field name="quotation_count" widget="statinfo"/>
                             </button>
                         </div>
                         <group>
@@ -50,7 +44,6 @@
                 <tree>
                     <field name="number_actual" />
                     <field name="date_valid" />
-                    <field name="total" string="Total(€)"/>
                 </tree>
             </field>
         </record>

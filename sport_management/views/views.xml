@@ -18,6 +18,12 @@
             <field name="view_mode">tree,form</field>
         </record>
 
+        <record model="ir.actions.act_window" id="action_sport_state">
+            <field name="name">sport stzates</field>
+            <field name="res_model">sport.state</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
         <record model="ir.actions.act_window" id="action_sport_activity">
             <field name="name">Activitées</field>
             <field name="res_model">sport.activity</field>
@@ -124,6 +130,7 @@
         <menuitem name="Account" id="menu_sport_account" parent="account_management_top" action="action_sport_account" sequence="1"/>
         <menuitem name="Type course" id="menu_sport_type" parent="account_management_top" action="action_sport_type" sequence="2"/>
         <menuitem name="Sport badges" id="menu_sport_badge" parent="account_management_top" action="action_sport_badge" sequence="3"/>
+        <menuitem name="Sport states" id="menu_sport_state" parent="account_management_top" action="action_sport_state" sequence="4"/>
 
         <menuitem name="Session management" id="session_management_top" parent="sport_management_menu" sequence="2"/>
         <menuitem name="Activitées" id="menu_sport_activity" parent="session_management_top" action="action_sport_activity" sequence="1"/>
@@ -131,6 +138,22 @@
 
         <!-- website menu -->
 
+
+        <!-- server action -->
+        <record id="sport_on_create_credit_server_action" model="ir.actions.server">
+            <field name="name">check state</field>
+            <field name="model_id" ref="sport_management.model_sport_credit" />
+            <field name="state">code</field>
+            <field name="kind">on_create</field>
+            <field name="code">model.check_state()</field>
+        </record>
+
+        <record id="automated_sport_on_create_credit_server_action" model="base.action.rule">
+            <field name="name">Automated check state</field>
+            <field name="model_id" ref="sport_management.model_sport_credit"/>
+            <field name="kind">on_write</field>
+            <field name="server_action_ids" eval="[(6,0,[ref('sport_on_create_credit_server_action')])]"/>
+        </record>
 
     </data>
 </odoo>

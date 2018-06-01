@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'website', 'calendar','contacts'],
+    'depends': ['base', 'sale', 'website', 'calendar','contacts', 'point_of_sale', 'base_automation'],
 
     # always loaded
     'data': [
@@ -34,7 +34,7 @@
         'data/cron.xml',
         'views/res_partner_view.xml',
         'views/sport_badge_view.xml',
-        'views/sale_order_view.xml',
+        #'views/sale_order_view.xml',
         'views/sport_session_view.xml',
         'views/sport_subscription_view.xml',
         'views/web_template.xml',

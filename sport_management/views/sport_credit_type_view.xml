@@ -10,8 +10,6 @@
                     <sheet>
                         <group>
                             <field name="name" />
-                            <field name="price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
-                            <field name="product_id" />
                         </group>
                     </sheet>
                 </form>

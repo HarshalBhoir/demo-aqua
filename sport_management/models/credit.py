@@ -16,9 +16,6 @@ class SportCredit(models.Model):
     account_id = fields.Many2one('sport.account')
     date_valid = fields.Datetime(default=datetime.now() + timedelta(days=365))
     number_actual = fields.Integer(String="Crédit rstant")
-    total = fields.Float(compute='_compute_total')
-    quotation_ids = fields.One2many('sale.order', 'credit_id')
-    quotation_count = fields.Integer(compute="_compute_quotation_count")
     date_buy = fields.Datetime(default=datetime.now(), string="Date d'achat")
     qty_buy = fields.Integer(string="Quantité initial")
     product_id = fields.Many2one('product.template', string="Carte")
@@ -40,11 +37,6 @@ class SportCredit(models.Model):
 
     def _compute_date_valid(self):
         pass
-    
-    @api.depends('number_actual', 'type_id')
-    def _compute_total(self):
-        for credit in self:
-            credit.total = credit.number_actual * credit.type_id.price
 
     @api.depends('status')
     def _set_invalid(self):
@@ -59,35 +51,6 @@ class SportCredit(models.Model):
                 credit.status = "valid"
             else:
                 credit.status = "invalid"
-
-
-    def create_sale_order(self):
-        for credit in self:
-
-            order = None
-
-            vals = {
-
-                'currency_id':self.env.ref('base.main_company').currency_id.id,
-                'partner_id':credit.client_id.id,
-                'partner_invoice_id':credit.client_id.id,
-                'partner_shipping_id':credit.client_id.id,
-                'pricelist_id':credit.client_id.property_product_pricelist.id,
-                'credit_id':credit.id,
-            }
-
-
-            order = self.env['sale.order'].create(vals)
-            product = credit.type_id.product_id
-            vals = {
-                'name': product.name,
-                'order_id':order.id,
-                'price_unit':credit.type_id.price,
-                'product_id':product.id,
-                'product_uom_qty':credit.number_actual,
-            }
-
-            order.line = self.env['sale.order.line'].create(vals)
             
     def invalid_expire_credit(self):
         credits = self.env['sport.credit'].search([['status','=','valid']])
@@ -106,3 +69,15 @@ class SportCredit(models.Model):
                 credit.status = "invalid"
             else:
                 credit.status = "valid"
+
+    def check_state(self):
+        _logger.info("JE SUIS LAAAAAAAAAAAA")
+        account = self.account_id
+        for credit in account.credit_ids:
+                states = self.env['sport.state'].search([['type_id','=',credit.type_id.id],['account_id','=',account.id]])
+                if not states:
+                    vals = {
+                        'type_id' : credit.type_id.id,
+                        'account_id' : account.id
+                    }
+                    self.env['sport.state'].create(vals)

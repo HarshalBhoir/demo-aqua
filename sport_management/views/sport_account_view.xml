@@ -23,6 +23,12 @@
                             <field name="date_create" />
                             <field name="owner_id" />
                             <field name="badge_ids" />
+                            <field name="state_ids">
+                                <tree>
+                                    <field name="type_id"/>
+                                    <field name="credit_count"/>
+                                </tree>
+                            </field>
                         </group>
                     </sheet>
                 </form>

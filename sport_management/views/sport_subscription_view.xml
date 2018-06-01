@@ -4,7 +4,7 @@
             <field name="name">sport.badge.view.search</field>
             <field name="model">sport.subscription</field>
             <field name="arch" type="xml">
-                <search string="Search Badges">
+                <search string="Search Subscription">
                     <field name="client_id" operator="="/>
                     <field name="session_id" operator="="/>
                     <field name="state" operator="="/>

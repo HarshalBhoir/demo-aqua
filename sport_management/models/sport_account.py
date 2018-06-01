@@ -16,6 +16,7 @@ class SportAccount(models.Model):
     active = fields.Boolean(default=True)
     owner_id = fields.Many2one('res.partner', string="Owner")
     member_ids = fields.One2many('res.partner', 'account_id')
+    state_ids = fields.One2many('sport.state', 'account_id')
     
     def remove_credit(self):
         for account in self:
@@ -29,10 +30,24 @@ class SportAccount(models.Model):
     @api.depends('credit_ids')
     def _compute_credit_count(self):
         for account in self:
+            _logger.info("_compute_credit_count")
             account.credit_count = 0
             for credit in account.credit_ids:
                 if credit.status == "valid":
                     account.credit_count += credit.number_actual
+
+    @api.onchange('credit_ids')
+    def _check_credit_state(self):
+        _logger.info("_check_credit_state")
+        for account in self:
+            for credit in account.credit_ids:
+                states = self.env['sport.state'].search([['type_id','=',credit.type_id.id],['account_id','=',account.id]])
+                if not states:
+                    vals = {
+                        'type_id' : credit.type_id.id,
+                        'account_id' : account.id
+                    }
+                    self.env['sport.state'].create(vals)
 
     def _compute_badge_count(self):
         for account in self:
