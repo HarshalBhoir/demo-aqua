@@ -19,7 +19,7 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'sale', 'website', 'calendar', 'point_of_sale', 'base_automation'],
+    'depends': ['base', 'sale', 'website', 'calendar', 'contacts','point_of_sale', 'base_automation'],
 
     # always loaded
     'data': [
