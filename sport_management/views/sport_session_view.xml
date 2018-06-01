@@ -51,8 +51,8 @@
                             <field name="activity_id"/>
                             <field name="start_date"/>
                             <field name="end_date"/>
-                            <!-- <field name="coach_id"/> -->
-                            <field name="coach_id"  domain="[('is_coach','=', True)]"/>
+                             <field name="coach_id"/> 
+                            <!--<field name="coach_id"  domain="[('is_coach','=', True)]"/>-->
                             <field name="max_attendee" />
                             <field name="color"/>
                         </group>

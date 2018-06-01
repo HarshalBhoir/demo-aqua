@@ -11,7 +11,7 @@ class ResPartner(models.Model):
     credit_ids = fields.One2many('sport.credit', 'client_id')
     badge_ids = fields.One2many('sport.badge','client_id')
     sub_ids = fields.One2many('sport.subscription','client_id')
-    #is_coach = fields.Boolean(default=False)
+    #is_coach = fields.Boolean()
     account_id = fields.Many2one('sport.account', string="Compte", compute='_compute_account_id')
 
     @api.depends('badge_ids')

@@ -15,9 +15,9 @@
                     </page>
                 </page>
 
-                <field name="lang" position="after">
+               <!--  <field name="lang" position="after">
                     <field name="is_coach" />
-                </field>
+                </field>-->
             </field>
         </record>
 
