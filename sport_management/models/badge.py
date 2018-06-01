@@ -20,17 +20,19 @@ class SportBadge(models.Model):
     #1 : sub already valided
     #2 : No credit on card
     #3 : No session soon
+    #4 : Aucune inscription
     def scan_card(self):
         message = ""
         for badge in self:
+            _logger.info("Scan_card")
             client = badge.client_id
             account = badge.account_id
             now = datetime.now()
-            # hour = now + timedelta(hours=1)
-            hour = now + timedelta(hours=24)
+            hour = now /+ timedelta(hours=1)
+            # hour = now + stimedelta(hours=24)
             lst_subscriptions = client.sub_ids
             type_id = None
-
+            message = 4
             for sub in lst_subscriptions:
                 date = datetime.strptime(sub.session_id.start_date, '%Y-%m-%d %H:%M:%S')
 
@@ -42,6 +44,7 @@ class SportBadge(models.Model):
                         message = 1
                     else :
                         if not credit_id:
+                            _logger.info("no credit on card")
                             message = 2
                         else:
                             credit_id.number_actual = credit_id.number_actual - 1
@@ -49,9 +52,11 @@ class SportBadge(models.Model):
                             sub.state = "valid"
                             sub.scan_date = datetime.now()
                             sub.badge_id = badge
-                            sub.unit_price = credit_id.product_id.lst_price / credit_id.product_id.qty_course
-                            _logger.info(sub.unit_price)
+                            if credit_id.product_id.qty_course > 0 :
+                                sub.unit_price = credit_id.product_id.lst_price / credit_id.product_id.qty_course
                 else:
+                    _logger.info("no session soon")
                     message = 3
+            _logger.info("Message : ")
             _logger.info(message)
             return message

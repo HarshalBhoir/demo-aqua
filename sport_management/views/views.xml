@@ -140,7 +140,7 @@
 
 
         <!-- server action -->
-        <record id="sport_on_create_credit_server_action" model="ir.actions.server">
+        <!-- <record id="sport_on_create_credit_server_action" model="ir.actions.server">
             <field name="name">check state</field>
             <field name="model_id" ref="sport_management.model_sport_credit" />
             <field name="state">code</field>
@@ -153,7 +153,7 @@
             <field name="model_id" ref="sport_management.model_sport_credit"/>
             <field name="kind">on_write</field>
             <field name="server_action_ids" eval="[(6,0,[ref('sport_on_create_credit_server_action')])]"/>
-        </record>
+        </record> -->
 
     </data>
 </odoo>
