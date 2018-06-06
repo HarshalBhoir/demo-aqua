@@ -1,0 +1,22 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="client_history_product_list">
+      <field name="name">res.partner.inherit.history.product.form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"></field>
+      <field name="arch" type="xml">
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+          <page name="history_product" string="Historique d'achats">
+            <!-- <p>hello world</p> -->
+            <field name="list_products">
+              <tree>
+                <field name="name"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
